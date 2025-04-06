@@ -1,0 +1,6 @@
+1. Setup infrastructure (terraform)
+    cd 01_infrastructure
+    terraform init  # first time only
+    terraform plan -var-file="env_dev.tfvars"
+    terraform apply -var-file="env_dev.tfvars"
+
