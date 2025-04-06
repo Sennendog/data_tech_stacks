@@ -15,3 +15,7 @@ variable "credentials_file" {
   type        = string
 }
 
+variable "environment" {
+  description = "The environment in which the resources will be created."
+  type        = string
+}
