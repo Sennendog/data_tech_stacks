@@ -6,7 +6,15 @@ PROJECT_ID=$(<../../../gcp-project-id"
 # Define service account email
 SERVICE_ACCOUNT="datastacks-tf-sa@${PROJECT_ID}.iam.gserviceaccount.com"
 
+# enable services
+gcloud services enable cloudresourcemanager.googleapis.com --project "$PROJECT_ID" 
+
 # Assign IAM roles
+gcloud projects add-iam-policy-binding "$PROJECT_ID" \
+  --member="serviceAccount:${SERVICE_ACCOUNT}" \
+  --role="roles/serviceusage.serviceUsageAdmin"
+
+
 gcloud projects add-iam-policy-binding "$PROJECT_ID" \
   --member="serviceAccount:${SERVICE_ACCOUNT}" \
   --role="roles/storage.admin"
