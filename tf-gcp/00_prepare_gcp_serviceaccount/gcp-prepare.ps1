@@ -3,8 +3,8 @@ $projectId = Get-Content -Path "../../../gcp-project-id" -Raw
 $projectId = $projectId.Trim()  # Remove any trailing newline
 
 # enable services
-gcloud services enable cloudresourcemanager.googleapis.com --project $projectId
-gcloud services enable iam.googleapis.com --project $projectId
+gcloud services enable cloudresourcemanager.googleapis.com --project "$projectId"
+gcloud services enable iam.googleapis.com --project "$projectId"
 
 # Define the service account email
 $serviceAccount = "datastacks-tf-sa@$projectId.iam.gserviceaccount.com"
@@ -14,18 +14,18 @@ $roles = @(
     "roles/storage.admin",
     "roles/cloudfunctions.admin",
     "roles/iam.serviceAccountAdmin",
+    "roles/iam.securityAdmin",
     "roles/pubsub.admin",
     "roles/dataproc.editor",
     "roles/bigquery.admin",
     "roles/biglake.admin",
     "roles/serviceusage.serviceUsageAdmin",
-    "roles/resourcemanager.projectIamAdmin"
+    "roles/resourcemanager.projectIamAdmin",
+    "roles/viewer"
 )
 
 # Assign each role using gcloud
 foreach ($role in $roles) {
     Write-Host "Assigning $role to $serviceAccount in project $projectId"
-    & gcloud projects add-iam-policy-binding $projectId `
-        --member="serviceAccount:$serviceAccount" `
-        --role=$role
+    & gcloud projects add-iam-policy-binding "$projectId" --member="serviceAccount:$serviceAccount" --role=$role
 }
