@@ -4,6 +4,7 @@ $projectId = $projectId.Trim()  # Remove any trailing newline
 
 # enable services
 gcloud services enable cloudresourcemanager.googleapis.com --project $projectId
+gcloud services enable iam.googleapis.com --project $projectId
 
 # Define the service account email
 $serviceAccount = "datastacks-tf-sa@$projectId.iam.gserviceaccount.com"
