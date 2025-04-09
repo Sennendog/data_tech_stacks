@@ -18,7 +18,8 @@ $roles = @(
     "roles/dataproc.editor",
     "roles/bigquery.admin",
     "roles/biglake.admin",
-    "roles/serviceusage.serviceUsageAdmin"
+    "roles/serviceusage.serviceUsageAdmin",
+    "roles/resourcemanager.projectIamAdmin"
 )
 
 # Assign each role using gcloud
