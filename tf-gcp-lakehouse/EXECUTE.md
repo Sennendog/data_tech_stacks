@@ -1,9 +1,11 @@
-0. Setup Service Account permissions for terraform
+# How to execute/deploy this project
+
+## Setup Service Account permissions for terraform
     cd 00_prepare_gcp_serviceaccount
     Linux: ./gcp-prepapre.sh
     Windows: ./gcp-prepapre.ps1
 
-1. Setup infrastructure (terraform)
+## Setup infrastructure (terraform)
     cd 01_infrastructure
     terraform init  # first time only
     terraform plan -var-file="env_dev.tfvars"
