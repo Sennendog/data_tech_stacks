@@ -2,4 +2,8 @@
 
 1. terraform 1.11+ installed
 
-2. Have an existing GCP project and service account set up.
+2. Have an existing GCP project and service account set up.  
+   Adjust credentials in local files:     
+   ../../../gcp-project-id    -> contains your personal gcp project id (eg.g "demostack-1234")  
+   ../../../credentials.json  -> your gcp service account credential file (keep secret!)  
+     
