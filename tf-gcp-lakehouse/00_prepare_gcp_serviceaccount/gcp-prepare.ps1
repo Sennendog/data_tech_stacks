@@ -20,6 +20,7 @@ $roles = @(
     "roles/bigquery.admin",
     "roles/biglake.admin",
     "roles/serviceusage.serviceUsageAdmin",
+    "roles/iam.serviceAccountUser",
     "roles/resourcemanager.projectIamAdmin",
     "roles/viewer"
 )

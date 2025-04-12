@@ -28,3 +28,8 @@ resource "google_project_service" "bigquery" {
 resource "google_project_service" "biglake" {
   service = "biglake.googleapis.com"
 }
+
+resource "google_project_service" "cloud_build" {
+  service = "cloudbuild.googleapis.com"
+}
+
