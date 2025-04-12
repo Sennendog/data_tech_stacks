@@ -1,7 +1,7 @@
 
 # gcp cloud storage bucket
 resource "google_storage_bucket" "datalake_storage" {
-  name     = "tf-gcp-datalake"
+  name     = "${data.google_project.project.project_id}-tf-gcp-datalake"
   location = var.region
   uniform_bucket_level_access = true
   hierarchical_namespace {

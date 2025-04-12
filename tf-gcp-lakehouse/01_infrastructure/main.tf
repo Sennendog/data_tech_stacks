@@ -1,12 +1,15 @@
 # Enable required APIs
 
-
-resource "google_project_service" "cloud_functions" {
-  service = "cloudfunctions.googleapis.com"
+resource "google_project_service" "pubsub" {
+  service = "pubsub.googleapis.com"
 }
 
 resource "google_project_service" "eventarc" {
   service = "eventarc.googleapis.com"
+}
+
+resource "google_project_service" "cloud_functions" {
+  service = "cloudfunctions.googleapis.com"
 }
 
 resource "google_project_service" "dataproc" {

@@ -5,9 +5,19 @@ $projectId = $projectId.Trim()  # Remove any trailing newline
 # enable services
 gcloud services enable cloudresourcemanager.googleapis.com --project "$projectId"
 gcloud services enable iam.googleapis.com --project "$projectId"
+gcloud services enable pubsub.googleapis.com --project "$projectId"
+gcloud services enable cloudfunctions.googleapis.com --project "$projectId"
+gcloud services enable storage-component.googleapis.com --project "$projectId"
+gcloud services enable dataproc.googleapis.com --project "$projectId"
+gcloud services enable bigquery.googleapis.com --project "$projectId"
+gcloud services enable biglake.googleapis.com --project "$projectId"
+gcloud services enable serviceusage.googleapis.com --project "$projectId"
+gcloud services enable cloudbuild.googleapis.com --project "$projectId"
+gcloud services enable run.googleapis.com --project "$projectId"
+
 
 # Define the service account email
-$serviceAccount = "datastacks-tf-sa@$projectId.iam.gserviceaccount.com"
+$serviceAccount = "terraform-sa@$projectId.iam.gserviceaccount.com"
 
 # Define the roles to assign
 $roles = @(
