@@ -24,10 +24,17 @@ resource "google_storage_bucket" "function_bucket" {
   location = var.region
 }
 
+data "archive_file" "function_zip" {
+  type        = "zip"
+  output_path = "../output/gcs_trigger_function.zip"
+  source_dir  = "../02_cloudfunctions/gcs_trigger_function"  # Path to your local function code directory
+  excludes    = ["venv", "__pycache__"]
+}
+
 resource "google_storage_bucket_object" "function_code" {
   name   = "gcs_trigger_function.zip"
   bucket = google_storage_bucket.function_bucket.name
-  source = "../02_cloudfunction/gcs_trigger_function.zip"  # Path to your local zip file
+  source = data.archive_file.function_zip.output_path  # Path to your local zip file
 }
 
 
