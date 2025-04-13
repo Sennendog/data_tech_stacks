@@ -1,3 +1,5 @@
 # requirements.txt
 
 requests
+cloudevents
+functions_framework
