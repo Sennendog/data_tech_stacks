@@ -12,8 +12,7 @@ resource "google_project_iam_member" "cloud_function_sa_roles" {
     "roles/dataproc.editor",
     "roles/storage.objectViewer",
     "roles/pubsub.subscriber",
-    "roles/cloudfunctions.invoker",
-    "roles/storage.objectViewer"
+    "roles/cloudfunctions.invoker"
   ])
   project = data.google_project.project.project_id
   role    = each.key
@@ -72,6 +71,6 @@ resource "google_cloudfunctions2_function" "gcs_trigger_function" {
     trigger_region = var.region
     event_type     = "google.cloud.pubsub.topic.v1.messagePublished"
     pubsub_topic   = google_pubsub_topic.gcs_topic.id
-    retry_policy   = "RETRY_POLICY_RETRY"
+    retry_policy   = "RETRY_POLICY_DO_NOT_RETRY"
   }
 }

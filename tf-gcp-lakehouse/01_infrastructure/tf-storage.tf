@@ -1,7 +1,16 @@
 
 # gcp cloud storage bucket
 resource "google_storage_bucket" "datalake_storage" {
-  name     = "${data.google_project.project.project_id}-tf-gcp-datalake"
+  name     = "${data.google_project.project.project_id}-tf-gcp-landingzone"
+  location = var.region
+  uniform_bucket_level_access = true
+  hierarchical_namespace {
+    enabled = true
+  }  
+}
+
+resource "google_storage_bucket" "iceberg_storage" {
+  name     = "${data.google_project.project.project_id}-tf-gcp-iceberg"
   location = var.region
   uniform_bucket_level_access = true
   hierarchical_namespace {
@@ -10,22 +19,15 @@ resource "google_storage_bucket" "datalake_storage" {
 }
 
 
-# create folders in the bucket
-resource "google_storage_folder" "datalake_landingzone_folder" {
-  name   = "landingzone/"
-  bucket = google_storage_bucket.datalake_storage.name
-}
-
-resource "google_storage_folder" "datalake_iceberg_folder" {
-  name   = "iceberg/"
-  bucket = google_storage_bucket.datalake_storage.name
-}
-
-
-
 # Create a Pub/Sub topic for GCS notifications
 resource "google_pubsub_topic" "gcs_topic" {
   name = "tf-gcp-datalake-events"
+
+  message_retention_duration = "86400s" # 7 days (max allowed is 31 days = 2678400s)
+
+  labels = {
+    environment = var.environment
+  }  
 }
 
 resource "google_pubsub_topic_iam_member" "gcs_publisher" {
