@@ -1,13 +1,13 @@
 # tf-gcp-lakehouse: Terraform - GCP provisioning of Data Lakehouse  
 
-This project builds a Data Lakehouse architecture with storage/compute separation using BigQuery and Apache Iceberg open storage format.  
+This project builds a Data Lakehouse architecture with storage/compute separation using Apache Iceberg open storage format.  
 
-It uses Cloud Functions + Apache Flink + BigQuery BigLake Iceberg for an event-driven and streaming-friendly architecture, leverageing GCP-native services and Flink for scalable ingestion.  
+It uses Cloud Functions + Cloud Dataproc + BigQuery/BigLake Iceberg for an event-driven architecture, leverageing GCP-native serverless services and Spark for scalable ingestion.  
   
 ## Components:  
 - **GCS**: storage for raw data (landingzone) and Iceberg tables
 - **Pub/sub** and **Cloud Function**: Trigger for ingestion jobs
-- **Apache Flink (via Dataproc)**:  Ingests files and writes to Iceberg tables
+- **Apache Spark (via Dataproc Serverless)**:  Ingests files and writes to Iceberg tables
 - **BigQuery BigLake**: Iceberg catalog
 - **BigQuery**: Query engine
   
