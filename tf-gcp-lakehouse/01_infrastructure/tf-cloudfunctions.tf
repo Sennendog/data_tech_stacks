@@ -67,6 +67,15 @@ resource "google_cloudfunctions2_function" "gcs_trigger_function" {
     available_memory   = "256M"
     timeout_seconds    = 300
     service_account_email = google_service_account.cloud_function_sa.email
+
+    environment_variables = {
+      PROJECT_ID = data.google_project.project.project_id
+      REGION      = var.region
+      PYSPARK_URI = "gs://${google_storage_bucket.dataproc_bucket.name}/${google_storage_bucket_object.dataproc_ingest_job.name}"
+      TARGET_TABLE = "DATALAKE.ICEBERG_TABLE"
+      TMP_BUCKET = "gs://${google_storage_bucket.dataproc_bucket.name}"
+    }
+
   }
 
   event_trigger {

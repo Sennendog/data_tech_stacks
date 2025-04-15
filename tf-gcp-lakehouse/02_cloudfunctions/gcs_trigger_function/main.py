@@ -11,24 +11,30 @@ from googleapiclient.discovery import build
 @functions_framework.cloud_event
 def gcs_file_trigger(cloud_event: CloudEvent):
     try:
-        # Decode Pub/Sub message
-        data = cloud_event.data
-        if 'data' not in data:
+        # Get the raw event data
+        event_data = cloud_event.data  # this is a dict
+        pubsub_message = event_data['message']
+        print(f"Received Pub/Sub message: {pubsub_message}")
+
+        # Decode the base64-encoded "data" field
+        if 'data' not in pubsub_message:
             raise ValueError("Missing 'data' field in Pub/Sub message.")
 
-        message = json.loads(
-            base64.b64decode(data['data']).decode('utf-8')
-        )
+        payload_json = base64.b64decode(pubsub_message['data']).decode('utf-8')
+        payload = json.loads(payload_json)
 
-        bucket = message['bucket']
-        name = message['name']
+        # Access useful fields
+        bucket = payload.get("bucket")
+        name = payload.get("name")
         gcs_path = f"gs://{bucket}/{name}"
+
 
         # Read from environment
         project = os.environ["PROJECT_ID"]
         region = os.environ["REGION"]
         pyspark_script_uri = os.environ["PYSPARK_URI"]
         target_table = os.environ["TARGET_TABLE"]
+        tmp_bucket = os.environ["TMP_BUCKET"]
 
         credentials, _ = default()
         dataproc = build("dataproc", "v1", credentials=credentials)
@@ -41,7 +47,7 @@ def gcs_file_trigger(cloud_event: CloudEvent):
                 "mainPythonFileUri": pyspark_script_uri,
                 "args": [
                     "--input", gcs_path,
-                    "--bucket", bucket,
+                    "--bucket", tmp_bucket,
                     "--table", target_table
                 ]
             },
@@ -68,9 +74,9 @@ def gcs_file_trigger(cloud_event: CloudEvent):
             }
         )
 
-        print(f"Dataproc Serverless batch to be submitted: {request}")
-        # response = request.execute()
-        # print(f"Submitted Dataproc Serverless batch: {response['name']}")
+        print(f"Dataproc Serverless batch to be submitted: {job_payload}")
+        response = request.execute()
+        print(f"Submitted Dataproc Serverless batch: {response['name']}")
 
     except Exception as e:
         print(f"Error processing CloudEvent: {e}")
