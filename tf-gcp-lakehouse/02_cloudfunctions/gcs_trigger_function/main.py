@@ -1,33 +1,77 @@
 import os
-import requests
-from cloudevents.http import CloudEvent
+import json
+import base64
+from datetime import datetime
 import functions_framework
-
-FLINK_CONTROLLER_ENDPOINT = "https://flink-controller.yourdomain.com/ingest"
+from cloudevents.http import CloudEvent
+from google.auth import default
+from googleapiclient.discovery import build
 
 
 @functions_framework.cloud_event
 def gcs_file_trigger(cloud_event: CloudEvent):
-    """Triggered by a change in a storage bucket."""
+    try:
+        # Decode Pub/Sub message
+        data = cloud_event.data
+        if 'data' not in data:
+            raise ValueError("Missing 'data' field in Pub/Sub message.")
 
-    print(f"gcs_file_trigger CloudEvent: {cloud_event}")
-    message_attributes = cloud_event.data.get("message", {}).get("attributes", {})
-    object_id = message_attributes.get("objectId")
+        message = json.loads(
+            base64.b64decode(data['data']).decode('utf-8')
+        )
 
-    file_name = object_id
-        
-    # Extract base filename without extension
-    base_filename = os.path.basename(file_name)
-    target_table, _ = os.path.splitext(base_filename)
+        bucket = message['bucket']
+        name = message['name']
+        gcs_path = f"gs://{bucket}/{name}"
 
-    payload = {
-        "gcs_file_path": file_name,
-        "target_table": target_table
-    }
+        # Read from environment
+        project = os.environ["PROJECT_ID"]
+        region = os.environ["REGION"]
+        pyspark_script_uri = os.environ["PYSPARK_URI"]
+        target_table = os.environ["TARGET_TABLE"]
 
-    # Notify Flink controller to start job
-    print(f"Triggering Flink ingestion with payload: {payload}")
-    response = requests.post(FLINK_CONTROLLER_ENDPOINT, json=payload)
+        credentials, _ = default()
+        dataproc = build("dataproc", "v1", credentials=credentials)
 
-    if response.status_code != 200:
-        raise RuntimeError(f"Failed to trigger Flink ingestion: {response.text}")
+        timestamp = datetime.utcnow().strftime("%Y%m%d%H%M%S")
+        job_id = f"biglake-ingest-{name.replace('/', '-').replace('.', '-')[:30]}-{timestamp}"
+
+        job_payload = {
+            "pysparkJob": {
+                "mainPythonFileUri": pyspark_script_uri,
+                "args": [
+                    "--input", gcs_path,
+                    "--bucket", bucket,
+                    "--table", target_table
+                ]
+            },
+            "labels": {
+                "trigger": "cloud-function"
+            },
+            "placement": {
+                "clusterSelector": {
+                    "clusterLabels": {
+                        "env": "serverless"
+                    }
+                }
+            }
+        }
+
+        request = dataproc.projects().locations().batches().create(
+            parent=f"projects/{project}/locations/{region}",
+            body={
+                "batchId": job_id,
+                "runtimeConfig": {
+                    "version": "2.1"
+                },
+                **job_payload
+            }
+        )
+
+        print(f"Dataproc Serverless batch to be submitted: {request}")
+        # response = request.execute()
+        # print(f"Submitted Dataproc Serverless batch: {response['name']}")
+
+    except Exception as e:
+        print(f"Error processing CloudEvent: {e}")
+        raise

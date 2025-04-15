@@ -38,6 +38,7 @@ resource "google_storage_bucket_object" "function_code" {
   name   = "gcs_trigger_function.zip"
   bucket = google_storage_bucket.function_bucket.name
   source = data.archive_file.function_zip.output_path  # Path to your local zip file
+  depends_on = [ data.archive_file.function_zip ]
 }
 
 
@@ -46,7 +47,8 @@ resource "google_storage_bucket_object" "function_code" {
 resource "google_cloudfunctions2_function" "gcs_trigger_function" {
   name        = "gcs-trigger-function"
   location    = var.region
-  description = "Triggers on new files in GCS and starts Flink ingestion"
+  description = "Triggers on new files in GCS and starts Spark ingestion"
+  depends_on = [ google_storage_bucket_object.function_code ]
 
   build_config {
     runtime     = "python310"
@@ -61,9 +63,9 @@ resource "google_cloudfunctions2_function" "gcs_trigger_function" {
 
   service_config {
     max_instance_count = 1
-    min_instance_count = 1
+    min_instance_count = 0
     available_memory   = "256M"
-    timeout_seconds    = 60
+    timeout_seconds    = 300
     service_account_email = google_service_account.cloud_function_sa.email
   }
 

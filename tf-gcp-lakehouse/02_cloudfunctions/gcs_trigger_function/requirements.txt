@@ -1,5 +1,7 @@
 # requirements.txt
 
 requests
+functions-framework
 cloudevents
-functions_framework
+google-auth
+google-api-python-client
