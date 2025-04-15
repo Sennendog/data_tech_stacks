@@ -53,15 +53,14 @@ def gcs_file_trigger(cloud_event: CloudEvent):
             }
         }
 
+
+        print(f"Dataproc Serverless batch to be submitted: {job_payload}")
         request = dataproc.projects().locations().batches().create(
             parent=f"projects/{project}/locations/{region}",
             batchId=job_id,
             body=job_payload
         )
-
-        print(f"Dataproc Serverless batch to be submitted: {job_payload}")
-        response = request.execute()
-        print(f"Submitted Dataproc Serverless batch: {response['name']}")
+        print(f"Submitted Dataproc Serverless batch: {request['name']}")
 
     except Exception as e:
         print(f"Error processing CloudEvent: {e}")
