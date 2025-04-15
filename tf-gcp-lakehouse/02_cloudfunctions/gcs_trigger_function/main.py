@@ -43,35 +43,20 @@ def gcs_file_trigger(cloud_event: CloudEvent):
         job_id = f"biglake-ingest-{name.replace('/', '-').replace('.', '-')[:30]}-{timestamp}"
 
         job_payload = {
-            "pysparkJob": {
+            "pysparkBatch": {
                 "mainPythonFileUri": pyspark_script_uri,
                 "args": [
                     "--input", gcs_path,
                     "--bucket", tmp_bucket,
                     "--table", target_table
                 ]
-            },
-            "labels": {
-                "trigger": "cloud-function"
-            },
-            "placement": {
-                "clusterSelector": {
-                    "clusterLabels": {
-                        "env": "serverless"
-                    }
-                }
             }
         }
 
         request = dataproc.projects().locations().batches().create(
             parent=f"projects/{project}/locations/{region}",
-            body={
-                "batchId": job_id,
-                "runtimeConfig": {
-                    "version": "2.1"
-                },
-                **job_payload
-            }
+            batchId=job_id,
+            body=job_payload
         )
 
         print(f"Dataproc Serverless batch to be submitted: {job_payload}")

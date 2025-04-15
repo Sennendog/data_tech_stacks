@@ -19,6 +19,11 @@ resource "google_project_iam_member" "cloud_function_sa_roles" {
   member  = "serviceAccount:${google_service_account.cloud_function_sa.email}"
 }
 
+resource "google_service_account_iam_member" "allow_cf_to_impersonate_dataproc_sa" {
+  service_account_id = "${data.google_project.project.id}/serviceAccounts/${data.google_project.project.number}-compute@developer.gserviceaccount.com"
+  role               = "roles/iam.serviceAccountUser"
+  member             = "serviceAccount:${google_service_account.cloud_function_sa.email}"
+}
 
 
 # cloud function resources (bucket, source code)
