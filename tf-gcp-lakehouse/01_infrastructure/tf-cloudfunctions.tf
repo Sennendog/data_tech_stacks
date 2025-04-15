@@ -77,7 +77,7 @@ resource "google_cloudfunctions2_function" "gcs_trigger_function" {
       PROJECT_ID = data.google_project.project.project_id
       REGION      = var.region
       PYSPARK_URI = "gs://${google_storage_bucket.dataproc_bucket.name}/${google_storage_bucket_object.dataproc_ingest_job.name}"
-      TARGET_TABLE = "DATALAKE.ICEBERG_TABLE"
+      TARGET_TABLE = "datalake.iceberg_table"
       TMP_BUCKET = "gs://${google_storage_bucket.dataproc_bucket.name}"
     }
 
