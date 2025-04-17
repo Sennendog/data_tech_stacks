@@ -10,7 +10,15 @@ It uses Cloud Functions + Cloud Dataproc + BigQuery/BigLake Iceberg for an event
 - **Apache Spark (via Dataproc Serverless)**:  Ingests files and writes to Iceberg tables
 - **BigQuery BigLake**: Iceberg catalog
 - **BigQuery**: Query engine
-  
+
+
+## Requirements:  
+ - see [Requirements.md](REQUIREMENTS.md)
+
+
+## How to deploy and run:  
+ - see [Execute.md](EXECUTE.md)
+
   
 ## Architecture:  
 ![image](ARCHITECTURE.png)
