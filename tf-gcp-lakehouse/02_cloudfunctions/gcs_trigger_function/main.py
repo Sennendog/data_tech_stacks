@@ -40,7 +40,7 @@ def gcs_file_trigger(cloud_event: CloudEvent):
         dataproc = build("dataproc", "v1", credentials=credentials)
 
         timestamp = datetime.utcnow().strftime("%Y%m%d%H%M%S")
-        job_id = f"biglake-ingest-{name.replace('/', '-').replace('.', '-')[:30]}-{timestamp}"
+        job_id = f"biglake-ingest-{timestamp}"
 
         job_payload = {
             "pysparkBatch": {
