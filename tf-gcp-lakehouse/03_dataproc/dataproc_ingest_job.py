@@ -12,8 +12,8 @@ args = parser.parse_args()
 spark = SparkSession.builder.appName("IngestToBigLake").getOrCreate()
 
 schema = StructType([
-    StructField("tkey", StringType(), True),
-    StructField("tavlue", StringType(), True),
+    StructField("table_key", StringType(), True),
+    StructField("table_value", StringType(), True),
 ])
 
 # Read the file
