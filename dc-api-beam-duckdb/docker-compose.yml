@@ -1,0 +1,11 @@
+services:
+  fastapi-app:
+    build:
+      context: .
+      dockerfile: ./dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app  # optional: mount the project folder inside container
+    working_dir: /app
+    restart: unless-stopped

@@ -9,5 +9,7 @@
    * venv-beam/Scripts/activate (or Activate.ps1)
    * pip install -r requirements.txt
 
+4. build and run docker image
+   * docker-compose up --build
 
      
