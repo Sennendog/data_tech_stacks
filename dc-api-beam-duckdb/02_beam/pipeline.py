@@ -90,15 +90,13 @@ def run_pipeline(venue_id, lat, lon, start_date, end_date):
             | "Output number of records to console" >> beam.Map(lambda records: (print(f"Number of records inserted: {len(records)}"), records)[1])
             | "write to duckdb" >> beam.Map(lambda records: write_to_duckdb(records))
             #| "Output to Console" >> beam.Map(lambda x: print(json.dumps(x, indent=2)))
-        )
+        ) # type: ignore
 
 
 # ---------- Example Invocation ----------
 if __name__ == '__main__':
-    run_pipeline(
-        venue_id='London',
-        lat=51.50,
-        lon=0.12,
-        start_date='2024-12-01',
-        end_date='2024-12-31'
-    )
+    venue_id, lat, lon, start_date, end_date = sys.argv[1:6]
+    run_pipeline(venue_id, float(lat), float(lon), start_date, end_date)
+
+    print(f"Pipeline completed for venue_id: {venue_id}, lat: {lat}, lon: {lon}, start_date: {start_date}, end_date: {end_date}")
+    print(f"Data written to {DUCKDB_PATH} table {TABLE_NAME}")
