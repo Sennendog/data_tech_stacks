@@ -1,3 +1,3 @@
-# Build and run:
+# Run:
 
 docker-compose up
