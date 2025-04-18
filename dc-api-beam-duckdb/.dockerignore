@@ -1,0 +1,6 @@
+venv-beam/
+*.duckdb
+__pycache__/
+*.pyc
+.git
+.gitignore
