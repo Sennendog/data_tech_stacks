@@ -16,7 +16,7 @@ It uses Docker Compose to run the pipeline in a containerized environment (local
 
 
 ## How to deploy and run:  
- - see [Execute.md](EXECUTE.md)
+ - see [Execute.md](01_docker/EXECUTE.md)
 
   
 ## Architecture:  
