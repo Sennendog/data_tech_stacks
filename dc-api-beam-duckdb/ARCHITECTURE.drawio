@@ -1,0 +1,87 @@
+<mxfile host="65bd71144e">
+    <diagram id="DyFq04FiFbYTHU8WMJFI" name="Page-1">
+        <mxGraphModel dx="1386" dy="949" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="#ffffff" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Docker Compose - Data Pipeline (API - Apache Beam - DuckDB)&lt;/h1&gt;&lt;p&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;This project builds a data pipeline ingesting data from an API using Apache Beam, storing the results in a DuckDB database.&lt;/li&gt;&lt;li&gt;It uses Docker Compose to run the pipeline in a containerized environment (locally or any cloud provider).&lt;/li&gt;&lt;li&gt;The ingestion pipeline itself is triggered via an API endpoint.&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Components:&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;b style=&quot;background-color: transparent;&quot;&gt;FastAPI: &lt;/b&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;API Gateway/ASGI Server&lt;/span&gt;&lt;/li&gt;&lt;li&gt;&lt;b&gt;OpenAPI: &lt;/b&gt;API Description&lt;/li&gt;&lt;li&gt;&lt;b&gt;Apache Beam (Python):&amp;nbsp; &lt;/b&gt;Scalable data pipeline implementation&lt;/li&gt;&lt;li&gt;&lt;b&gt;DuckDB: &lt;/b&gt;OLAP data store&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="20" width="760" height="300" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="&lt;span style=&quot;color: rgb(63, 63, 63);&quot;&gt;Resources provisioned via Docker Compose:&lt;/span&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="40" y="480" width="760" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="87" value="Process Overview" style="swimlane;childLayout=stackLayout;horizontal=1;fillColor=none;horizontalStack=1;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;strokeColor=none;stackBorder=10;stackSpacing=-12;resizable=1;align=left;points=[];whiteSpace=wrap;html=1;spacingTop=4;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="320" width="760" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="88" value="&lt;b&gt;Pipeline API&lt;/b&gt;&lt;div&gt;invoked&lt;/div&gt;" style="shape=step;perimeter=stepPerimeter;fixedSize=1;points=[];whiteSpace=wrap;html=1;" parent="87" vertex="1">
+                    <mxGeometry x="10" y="33" width="194" height="77" as="geometry"/>
+                </mxCell>
+                <mxCell id="89" value="&lt;b&gt;Apache Beam&lt;/b&gt;&lt;div&gt;ingestion job&lt;/div&gt;&lt;div&gt;triggered&lt;/div&gt;" style="shape=step;perimeter=stepPerimeter;fixedSize=1;points=[];whiteSpace=wrap;html=1;" parent="87" vertex="1">
+                    <mxGeometry x="192" y="33" width="194" height="77" as="geometry"/>
+                </mxCell>
+                <mxCell id="90" value="&lt;div&gt;&lt;b&gt;Request data &lt;/b&gt;from&lt;/div&gt;&lt;div&gt;open-meteo API&lt;/div&gt;" style="shape=step;perimeter=stepPerimeter;fixedSize=1;points=[];whiteSpace=wrap;html=1;" parent="87" vertex="1">
+                    <mxGeometry x="374" y="33" width="194" height="77" as="geometry"/>
+                </mxCell>
+                <mxCell id="91" value="&lt;b&gt;Beam transformation&lt;/b&gt;&lt;div&gt;and result storing&lt;/div&gt;&lt;div&gt;in &lt;b&gt;DuckDB&lt;/b&gt;&lt;/div&gt;" style="shape=step;perimeter=stepPerimeter;fixedSize=1;points=[];whiteSpace=wrap;html=1;" parent="87" vertex="1">
+                    <mxGeometry x="556" y="33" width="194" height="77" as="geometry"/>
+                </mxCell>
+                <mxCell id="93" value="" style="swimlane;startSize=0;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="520" width="760" height="560" as="geometry">
+                        <mxRectangle x="40" y="520" width="50" height="40" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="94" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://tcude.net/content/images/size/w2000/2022/01/MainImage-2.jpeg;" vertex="1" parent="93">
+                    <mxGeometry x="640" y="0.9999999999999993" width="120" height="57.6" as="geometry"/>
+                </mxCell>
+                <mxCell id="95" value="Container" style="swimlane;" vertex="1" parent="93">
+                    <mxGeometry x="40" y="50" width="601" height="480" as="geometry">
+                        <mxRectangle x="40" y="50" width="90" height="30" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="96" value="" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Docker.svg;" vertex="1" parent="95">
+                    <mxGeometry x="540" y="29.999999999999993" width="50" height="41" as="geometry"/>
+                </mxCell>
+                <mxCell id="119" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="95" source="97" target="107">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="97" value="FastAPI Service&lt;br&gt;Port 8080" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=#232F3E;fillColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.http_protocol;aspect=fixed;" vertex="1" parent="95">
+                    <mxGeometry x="20" y="170" width="83" height="83" as="geometry"/>
+                </mxCell>
+                <mxCell id="103" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://beam.apache.org/images/logos/full-color/name-right/beam-logo-full-color-name-right-1000.png;" vertex="1" parent="95">
+                    <mxGeometry x="170" y="130" width="97" height="97" as="geometry"/>
+                </mxCell>
+                <mxCell id="120" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=classic;endFill=1;" edge="1" parent="95">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="235" y="300.0000000000002" as="sourcePoint"/>
+                        <mxPoint x="230" y="369.9999999999998" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="235" y="330"/>
+                            <mxPoint x="230" y="330"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="122" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0.008;entryY=0.563;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="95" source="107" target="115">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="107" value="&#xa;Apache Beam &#xa;Data Ingestion and&#xa;Transformation&#xa;Pipeline (Python)" style="rounded=1;arcSize=10;dashed=0;fillColor=none;gradientColor=none;strokeWidth=2;" vertex="1" parent="95">
+                    <mxGeometry x="160" y="150" width="170" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="121" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;" edge="1" parent="95" source="109" target="107">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="109" value="open-meteo API" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/devops/API_Connections.svg;" vertex="1" parent="95">
+                    <mxGeometry x="206" y="370" width="68" height="45.32" as="geometry"/>
+                </mxCell>
+                <mxCell id="115" value="" style="shape=datastore;whiteSpace=wrap;html=1;" vertex="1" parent="95">
+                    <mxGeometry x="380" y="144" width="180" height="156" as="geometry"/>
+                </mxCell>
+                <mxCell id="114" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=data:image/png,iVBORw0KGgoAAAANSUhEUgAAAQAAAADFCAMAAACM/tznAAAAzFBMVEX///8AAAD/8QDx8fGhoaF/f39aWlp5eXn4+Pju7u6Tk5OXl5eoqKizs7PR0dH/+QAhISH/9QDd3d3/9wA0MQDX19dzc3MbGxtoYgCurq7p6ekdGwD//ADV1dVUVFS8vLzHx8dERESJiYkvLy9MTExtbW0oKCgRERENDQ04ODg/Pz8TEgDQxAAnJydmZmYlIwDazgDw4wCpnwBdWADEuQDj1wC0qgCLgwA/OwAvLACvpQBQSwB2cACVjQCglwCOhgA8OABWUQBiXACAeQDyQu6wAAAMoklEQVR4nO2de0MaOxPGXW4ioggoForsgqVqe2rFWo9v315O2+//nQ4ok+tMLrDLZnv2+c81LJkf2ckkmWT39kqVKpWHqmfxsDWr7+/XW+1hfHHQzLtCO1RvOJieR4qup4NhL++a7UCjYeNKtZ3rqjEc5V3DLHVQu6SNB920D/KuZ0ZKJnbrXzSJ865r+mrWDC1f13U77wqnrLaP9S/6kxDEXr8+6ORPeRB6bzYxf6U3f0S/2NrU/JUO86791urdbGP/slMseFww3M78lYZ527CNBtvbH0XzvK3YWM0tmz9oWtCB0mijzg/TVSEdQS8t81cqYH+Yqv0FJJCy/VFUsKdglLb9BSPQ1CZ8ttdJkfqCafr2L0cGeVvlrnoW9kfRft52ueooG/sLExVn4ABBxegM32UH4CZv21y01fjfplbe1tmVegQkK/xoYJotgOD7wjhb+6Mo9JnS1IbAlK7yttCsDeb/fRX2ekH29kdR3jaa5NQAXn/838fXWwAIOR78YLP915e7RaXf6VYWd/ef3m8G4DJvK2kl5pp/eqh0+t1uZaVut9+pPP5/IwJJ3naSapiq/epz58V2rn7n7ucGAG7ztpNS1VDp0zvN/OeG0HnYwB1U87aUkMEFfu1j5j+3gsonbwCh9oT0KvCXMWH+SuNvvgACjYcPyAo/dAz2Lwl88SUQZhYRORH0aLZ/SeC7J4AwQ4FborbfTO3/RZ2vfgDC7AeIyv60/f4rdU/9CORtKyZqJmRB+X8JwGc/ACFODhIu4LtLA1i6gd9eAI7ythYRsRjQd7J/KS8A9bytRYTngd67Auj88AEQYiSA19T19690F/CR96+4flEjxryt1dVE6/nVzQM8NwEYGp6OO1zjz7hzCG+l9Ayt54NLF/Ci/j0DILWMzt1H5MYXedurCZ8LWDjbz3vCUyVw6i+Q5yDJ215NaC/4j3MfsNJ7HECl/5d+5/D6wRoG4JW7C+BOQANQGf/U7lzL215N6JLgDy8ArygA3QftzuEtEs4wAM5RwDOA3ySAhXbnWd72akIBPPoA6H+jACBhYnih4H8eAOoD0noE9LFieI/AIQbg73ScYF+fMwvPCaJTwr+8ADxRADr/aHcOrxtEEwNO3SPhCnvQNQCde/3O4aUJEKGwO4HuHQGggwSCUZK3vZrwGTGPbqAPU8MSgG4fnzQ/y9teXSgADyfQf2IAukz9xSM+XRrecHjrCRHe1b3mIlfQ87YWEb407DgnyqMAN4U4JYaGglHk6AWRcN+k8OIgMkHOcUA49lsbCm86gM6R/uzSBrA5D5OCTBglEoRcgqFu5drL/uu8bUU1J2r722Fx1DNJIszFUTJL9ruNgOe6WJgugFoZWOne7Ag73ikigSYJ0YekfEMzpNbPf9czOSDMKGAlw16hTxVqUNBZPNEfIxRmgojpGYhWeTJYI+j3kaGuVYE+AXQ/8Kynv8ZKK+j2Ow+emSHPCrMPWOnCXPGnx8q4A6my/c54cb+J+VF0nLedtKwnJjz9eLirjMfjyt3j35tZH3SydHZbJkWFNxsmKPMdM1F0nreNRu2gCYQZBTLZtkxsrQ95W2iRZc/E9kryttAm50MDN9M0b/usynDv+EpBzoTIQlNF0lJ4K2KINj49z653edvmJHrjxNYqwAOwUmYbqAMPAbiIJYJtVZhDVDJyA6HOA2FqOhyg7KvzANdDaVX95vldFOZOMVKpdwUF6QC4UiYQ4iYhiw7SnBso3O+/UjU1T3hSSPuXfUFKveGkUP5fUirHyg3ytmIbpRAVh7pX3lGjLY9W+1BA968ITSJ2VYi5QN4abTxLdlP8n/9FyclG9hdm9Oug2H+6vBCzXx6Kvbzh+Z9m/krH1BETmhpJ3nXNSNWhQ2w4rRU08HVTNR6YTp1uDAs27N9Io7iOZFbfDNoBbgLITs3ecdKutWb1er1Viy+CTfspVapUqVKlSpUqVapUqVKlSpUqVapUqVKlSpUqVeoPUtxSddg+OttZduLZ8EXWw6KHSD1jMo1ovq+qXjvCV973iaXqo90wgG1m1kMi8WSr63mClsaNusRST+h8ztkuFm0BwKGtIPkiq2vMKrKwnntlSmjdQZ7m9gCWViVaabqwdgKFMaP3TebPQRoAkB1VhrLq/ltLSnPWKTvpAIhulF/KVHYiF7XldGd8ln9KAKJrOb3IWFZ2uNak9mwzVtMCEH2Q2oCHSQBgUoceczB5K5bOdseaNwBez/kbKQlX2lkIF3kcMH9HFAUA0gFNo0Nh55vyzKQrHMABE/NBAEA6RaUntl8xuRyuSYV5KCE2AbiF2uUJO2Cz7A1RAEJW6RyuAQClI68KZQV3BZfk1suCPpEVBUA8D4NHRL211MJN6h/L1nTU2m9MJrf1Vox0KRiAAWI/BUA8suDEBmAPdnKJZ5GQAIRXx7CNO+zAMDVIPIZ/KNebNWn32GVbdSgIAKHtNfhVEoBweA1/jAkAMXKdBiC0AehjrABO5MvIgRKHeIlD7DOis6IBCNtSbADYdaGlGgDwLhLeaOAH4ADdO3guPSYagCEvKR0ZYQDA96uzf9oACHm5JgC8O90EAP72pUg+DEcFIOw0u5RqbwLAzm5hyGwAHFsAf7xifwCG0+UEIxQAgueVIxsjAO42wM0SANgh8ELcaATAbjT3BmDcP83PxJMBCI3mXPkKIwD20mOwggDA+kHhmhlAS/6EB4CpCQCvmARAOIboWu0yjQDYf6HbwAGw9iXuRzUDYG2m5wlA9P/7R8lSQ/HIyVu13AqA2Gi0kMEMgD2rCgCpEPeviTOAPdjhMfQEwE3hEzZNYRslRG0CgKYQ2usBlRlAVfkg/Hl8Bjpu8wMfr8SPWgDAzzbzA8CDE8kU3sahCQgAhBMpkd0jZgDsw0cyAFzSPSwAoIITPwBT1H6RQFUFwD6CnxtqAQA/VM0BgDwnZAEA/fKNFwDNKzOx5zBWAAiDmgSriAUAdIQzBwDysZwWAOA4L70AMHer3xB2kc5kAILMfp4AAG86GjgAkG21AJAtcwUA3g55KRibgKEAECdHWwCA07l1ASDtzHVsAW+9AMBNkTNg4Rm4pAAQc0OOLWDuBECsmKMP8HsEIOJCvFlVnjlAHgH86GQLAKXN2QAIsbAFADStd14AYErDfgw0AgA/OtcCAL6xJQM4FyTNIPL1EQsA8K6D3QHAD06xAID5vrYMQC7UE+ZaWP9sAQBD7ZcnczcA0OOjLQDgo4n8pzoc5u8EY/7ZDKAp33hHALB3aZkBsLH3egxB3oiNN9iDZgYQyzdOwQkqEgCc8/gZmYk3A4BRK5hFk2SvRoRnwAwAvnY9jZppC+gJ06F6bcwAYBkD3AcNgA3v4EZGACx0X8dtWQJYjQ/5kpTfcJhFnuA9DACgbhAMGQGwGfr18IwBUE868HgERus4oCkDSFZ/cR+lnaFrBMAGkmCwAQB8IyyOmACw+sBrDRgAdbwOvkKJBLGwVrJYTZHhDULNmTEBYCMs1oGmBICFDswQuKB2VPD0KgHufE8Te6p6UkkIgPk5I8qcgAHAgf4ZAwBl4GwCwOew2CUN9Vowxlu7b/ZM6hVgs4xVFAA3RgkIDQDY8gMf6NPfzxox/IY0AJ4/xlvyVK4+iBmsOkstd4U1gHVltYURvjAgf5YGwBsNfzBpAGxaDtwsBaDJMxJu+FW2ViTnGrHFdMCqr9W8qMr8fI0AILS7xAXAiC8/Cc2SBMAWMdnbWggA4usyBI/HFy5EJ8UX3qvaxyU/eHGlltQBNHkZsfo4AHGeVSxOAeDti30hAKhVeVJCPBOP+5HQ8MsNaEPHfJjFVzO5FQ3WF/aEpEwIxZHV4WP+UQRAm9ezFwsL6XKfC9dGB4J64lFO7Bm25gjJnlwkfrNfqx3eiiel8TqIp0m+va0vNZGGo/D9WH4Ar5LQfGw5QvJEiq2w0IBtAMRfYc/ySjFxOdt8jiDrRtEMESwgtAGQZ98shdcTXC4AFPvNB4WK8auRFE9RQQHwyXMeEFoAKKdPmgtLNTUDMMxq6pL9k+F9I8Jd8SQpHhCy62YAah9mLCwnPxoBJLr9UgqPsRIkAXFOlkiTm7LC0AWZAFxpK2kmo4g8QUR1IkOwhZbWp3GaqB+4kkZIBAAeEEJ/bQCAzCObzL+VgzgSwIxOEz7WXyzXQEvH+nmi1hyhF/FAYmYGcF7Dfiba/Ik6QsU2TFxOZok5PzSWf9w5eRaeXHBCJrlpGyb4Ulny/DfSmq5vGi0ilRk3/rKBnNfYrGpyyo2tJu39wUr14YXxA8uCs2XJemt4jJRrkt/J66P86VJPpLSjXaVK/Zf0L+LV0IiDw5MTAAAAAElFTkSuQmCC;" vertex="1" parent="95">
+                    <mxGeometry x="433.98" y="210" width="76.02" height="58.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="124" value="OpenAPI" style="html=1;whiteSpace=wrap;" vertex="1" parent="95">
+                    <mxGeometry x="20" y="71" width="320" height="39" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
