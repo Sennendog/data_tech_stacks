@@ -12,4 +12,5 @@
 4. build and run docker image
    * docker-compose up --build
 
-     
+5. Test: Endpoint is on localhost:8080/fetch-weather
+   * POST request with json payload, see docs: http://localhost:8080/docs#/
