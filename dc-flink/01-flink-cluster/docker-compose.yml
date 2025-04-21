@@ -1,7 +1,9 @@
 version: "2.2"
 services:
   jobmanager:
-    image: flink:latest
+    build:
+      context: .
+      dockerfile: ./dockerfile  
     ports:
       - "8081:8081"
     command: jobmanager
@@ -11,7 +13,9 @@ services:
         jobmanager.rpc.address: jobmanager        
 
   taskmanager:
-    image: flink:latest
+    build:
+      context: .
+      dockerfile: ./dockerfile
     depends_on:
       - jobmanager
     command: taskmanager
