@@ -1,4 +1,4 @@
-FROM flink:2.0.0-scala_2.12-java21
+FROM flink:2.0.0-scala_2.12-java17
 
 
 # install python3 and pip3
