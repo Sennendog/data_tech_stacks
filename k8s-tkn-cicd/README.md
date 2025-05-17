@@ -1,8 +1,7 @@
 # k8x-tkn-cicd: Kubernetes setup with Tekton CI/CD pipeline
 
-This project builds a data pipeline for streaming data ingestion using Apache Flink.
+Tekton CI/CD pipeline on Kubernetes
 
-It uses Docker Compose to run an Apache Flink cluster in a containerized environment (locally or any cloud provider).
   
 ## Components:  
 - **Minikube**: local kubernetes
