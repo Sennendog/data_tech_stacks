@@ -1,0 +1,16 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: dbt-task
+  
+spec:
+  params:
+  - name: dbtcmd
+    type: string
+
+  steps:
+    - name: initialize
+      image: xemuliam/dbt:1.9-duckdb
+      script: |
+        #!/bin/bash
+        dbt $(params.dbtcmd)

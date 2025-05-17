@@ -1,0 +1,25 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: dbt-pipeline
+spec:
+  params:
+  - name: pipeline-command
+    type: string
+
+  tasks:
+    - name: pipeline-start-dbt
+      taskRef:
+        name: dbt-task
+      params:
+      - name: dbtcmd
+        value: --version
+
+    - name: pipeline-end-dbt
+      runAfter:
+        - pipeline-start-dbt
+      taskRef:
+        name: dbt-task
+      params:
+      - name: dbtcmd
+        value: $(params.pipeline-command)
